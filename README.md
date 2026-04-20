@@ -1,4 +1,3 @@
-# Project
 <h1>Save it: Personal Financial Tracker</h1>
 <h1>DEMO LINK: </h1>
 
