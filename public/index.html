@@ -1,13 +1,20 @@
+<!-- Name: Isaac Euceda
+     Date: 2026-04-21
+     CSC 372-01
+     Description: Dashboard page for the Save It app 
+-->
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard</title>
   <link rel="stylesheet" href="/css/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
   <nav class="navbar">
@@ -21,49 +28,49 @@
 
   <main class="container">
 
-```
-<!-- Header + Range Toggle -->
-<div class="page-header">
-  <h1>Your Spending</h1>
-  <div class="toggle-group">
-    <button class="toggle-btn active" data-range="week">This Week</button>
-    <button class="toggle-btn" data-range="month">This Month</button>
-  </div>
-</div>
+    ```
+    <!-- Header + Range Toggle -->
+    <div class="page-header">
+      <h1>Your Spending</h1>
+      <div class="toggle-group">
+        <button class="toggle-btn active" data-range="week">This Week</button>
+        <button class="toggle-btn" data-range="month">This Month</button>
+      </div>
+    </div>
 
-<!-- Pie Chart -->
-<section class="card chart-card">
-  <canvas id="pieChart"></canvas>
-  <p id="no-data-msg" class="no-data hidden">Add transactions to see your spending breakdown</p>
-</section>
+    <!-- Pie Chart -->
+    <section class="card chart-card">
+      <canvas id="pieChart"></canvas>
+      <p id="no-data-msg" class="no-data hidden">Add transactions to see your spending breakdown</p>
+    </section>
 
-<!-- Spending Breakdown List -->
-<section class="card">
-  <h2>Breakdown</h2>
-  <ul id="transaction-list" class="transaction-list"></ul>
-</section>
+    <!-- Spending Breakdown List -->
+    <section class="card">
+      <h2>Breakdown</h2>
+      <ul id="transaction-list" class="transaction-list"></ul>
+    </section>
 
-<!-- Add Transaction Form -->
-<section class="card">
-  <h2>Add Transaction</h2>
-  <div class="form-group">
-    <input type="text" id="title" placeholder="e.g. Groceries" />
-    <input type="number" id="amount" placeholder="Amount ($)" min="0" step="0.01" />
-    <select id="category">
-      <option value="">Select category</option>
-      <option value="Food">Food</option>
-      <option value="Transport">Transport</option>
-      <option value="Entertainment">Entertainment</option>
-      <option value="Shopping">Shopping</option>
-      <option value="Bills">Bills</option>
-      <option value="Health">Health</option>
-      <option value="Other">Other</option>
-    </select>
-    <input type="date" id="date" />
-    <button id="add-btn" class="btn-primary">Add Transaction</button>
-  </div>
-</section>
-```
+    <!-- Add Transaction Form -->
+    <section class="card">
+      <h2>Add Transaction</h2>
+      <div class="form-group">
+        <input type="text" id="title" placeholder="e.g. Groceries" />
+        <input type="number" id="amount" placeholder="Amount ($)" min="0" step="0.01" />
+        <select id="category">
+          <option value="">Select category</option>
+          <option value="Food">Food</option>
+          <option value="Transport">Transport</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Bills">Bills</option>
+          <option value="Health">Health</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="date" id="date" />
+        <button id="add-btn" class="btn-primary">Add Transaction</button>
+      </div>
+    </section>
+    ```
 
   </main>
 
@@ -77,4 +84,5 @@
   </script>
 
 </body>
+
 </html>

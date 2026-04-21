@@ -1,3 +1,9 @@
+/*
+Name:Isaac Euceda
+Date: 2026/04/21
+CSC-372-01
+Description: This file contains the JavaScript code for the dashboard page of the Save It application. It handles fetching transaction data, rendering the pie chart and transaction list, and managing user interactions such as adding and deleting transactions.
+*/
 let currentRange = 'week';
 let pieChart = null;
 

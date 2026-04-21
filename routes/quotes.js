@@ -1,3 +1,9 @@
+/*
+Name: Isaac Euceda
+Date: 2026-04-21
+CSC 372-01
+Description: This file contains the routes for fetching random quotes in the Save It application. The GET /quotes route fetches a random quote from the ZenQuotes API and returns it as JSON. If the API request fails, it returns a random fallback quote from a predefined list.
+*/
 const express = require('express');
 const router = express.Router();
 

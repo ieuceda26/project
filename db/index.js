@@ -1,4 +1,9 @@
-
+/*
+Name: Isaac Euceda
+Date: 2026-04-21
+CSC 372-01
+Description: This file sets up the connection to the PostgreSQL database using the pg library. It also initializes the database by creating the necessary tables for users, transactions, and goals if they do not already exist.
+*/
 const { Pool } = require('pg');
 
 const pool = new Pool({

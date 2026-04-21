@@ -1,3 +1,9 @@
+/*
+Name: Isaac Euceda
+Date: 2026-04-21
+CSC 372-01
+Description: This file contains the routes for user authentication in the Save It application. It includes routes for registering a new user, logging in an existing user, logging out, and fetching the current user's information. Passwords are hashed using bcrypt for security, and sessions are used to keep users logged in.
+*/
 const express = require('express');
 const bcrypt = require('bcrypt');
 const pool = require('../db');

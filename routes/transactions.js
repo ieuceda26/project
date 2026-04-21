@@ -1,3 +1,9 @@
+/*
+Name: Isaac Euceda
+Date: 2026-04-21
+CSC 372-01
+Description: This file contains the routes for managing transactions in the Save It application. It includes routes for fetching all transactions (optionally filtered by week or month), fetching spending summaries grouped by category, creating a new transaction, updating an existing transaction, and deleting a transaction. All routes are protected and require authentication.
+*/
 const express = require('express');
 const router = express.Router();
 const pool = require('../db');

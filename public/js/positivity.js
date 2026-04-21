@@ -1,3 +1,9 @@
+/*
+Name: Isaac Euceda
+Date: 2026/04/21
+CSC 372-01
+Description: This file contains the JavaScript code for the positivity page of the Save It application. It handles fetching and displaying a random quote, as well as allowing users to save their favorite quotes to local storage.
+*/
 // --- Quote ---
 async function loadQuote() {
   const textEl = document.getElementById('quote-text');

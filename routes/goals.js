@@ -1,3 +1,9 @@
+/*
+Name: Isaac Euceda
+Date: 2026-04-21
+CSC 372-01
+Description: This file contains the routes for managing savings goals in the Save It application. It includes routes for fetching all goals, creating a new goal, updating the saved amount for a goal, and deleting a goal. All routes are protected and require authentication.
+*/
 const express = require('express');
 const router = express.Router();
 const pool = require('../db');

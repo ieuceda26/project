@@ -1,3 +1,9 @@
+/*
+Name: Isaac Euceda
+Date: 2026-04-21
+CSC 372-01
+Description: This is the main server file for the Save It application. It sets up the Express server, configures middleware for CORS, JSON parsing, and session management using connect-pg-simple to store sessions in a PostgreSQL database. The server defines routes for authentication, transactions, goals, and quotes, as well as serving static files and protected pages. The server listens on a specified port for incoming requests.
+*/
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
