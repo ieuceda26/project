@@ -1,0 +1,82 @@
+// --- Quote ---
+async function loadQuote() {
+  const textEl = document.getElementById('quote-text');
+  const authorEl = document.getElementById('quote-author');
+  textEl.textContent = 'Loading...';
+  authorEl.textContent = '';
+
+  try {
+    const res = await fetch('/api/quotes');
+    const data = await res.json();
+    textEl.textContent = `"${data.text}"`;
+    authorEl.textContent = `— ${data.author}`;
+  } catch {
+    textEl.textContent = '"Small steps every day lead to big changes over time."';
+    authorEl.textContent = '— Unknown';
+  }
+}
+
+document.getElementById('new-quote-btn').addEventListener('click', loadQuote);
+
+// --- Goals ---
+async function loadGoals() {
+  const res = await fetch('/api/goals');
+  const goals = await res.json();
+  const list = document.getElementById('goals-list');
+
+  if (!goals.length) {
+    list.innerHTML = '<li class="empty-msg">No goals yet. Set one below!</li>';
+    return;
+  }
+
+  list.innerHTML = goals.map(g => {
+    const pct = Math.min(100, Math.round((g.saved_amount / g.target_amount) * 100));
+    return `
+      <li class="goal-item">
+        <div class="goal-header">
+          <span class="goal-title">${g.title}</span>
+          <button class="btn-danger" onclick="deleteGoal(${g.id})">✕</button>
+        </div>
+        <span class="goal-amounts">$${parseFloat(g.saved_amount).toFixed(2)} saved of $${parseFloat(g.target_amount).toFixed(2)} — ${pct}%</span>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" style="--pct:${pct}%"></div>
+        </div>
+      </li>
+    `;
+  }).join('');
+}
+
+// --- Add Goal ---
+document.getElementById('add-goal-btn').addEventListener('click', async () => {
+  const title = document.getElementById('goal-title').value.trim();
+  const target = document.getElementById('goal-target').value;
+  const saved = document.getElementById('goal-saved').value || 0;
+
+  if (!title || !target) {
+    alert('Please enter a goal title and target amount.');
+    return;
+  }
+
+  await fetch('/api/goals', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ title, target_amount: parseFloat(target), saved_amount: parseFloat(saved) }),
+  });
+
+  document.getElementById('goal-title').value = '';
+  document.getElementById('goal-target').value = '';
+  document.getElementById('goal-saved').value = '';
+
+  loadGoals();
+});
+
+// --- Delete Goal ---
+async function deleteGoal(id) {
+  if (!confirm('Delete this goal?')) return;
+  await fetch(`/api/goals/${id}`, { method: 'DELETE' });
+  loadGoals();
+}
+
+// Init
+loadQuote();
+loadGoals();

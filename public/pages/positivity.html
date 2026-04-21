@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SpendWise — Positivity</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">💸 SpendWise</div>
+    <div class="nav-links">
+      <a href="/">Dashboard</a>
+      <a href="/positivity" class="active">✨ Positivity</a>
+      <button class="btn-logout" onclick="logout()">Log out</button>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Quote Section -->
+    <section class="card quote-card">
+      <div class="quote-icon">✨</div>
+      <p id="quote-text" class="quote-text">Loading your quote...</p>
+      <p id="quote-author" class="quote-author"></p>
+      <button id="new-quote-btn" class="btn-secondary">New Quote</button>
+    </section>
+
+    <!-- Goals Section -->
+    <section class="card">
+      <h2>My Savings Goals</h2>
+      <ul id="goals-list" class="goals-list"></ul>
+    </section>
+
+    <!-- Add Goal Form -->
+    <section class="card">
+      <h2>Set a New Goal</h2>
+      <div class="form-group">
+        <input type="text" id="goal-title" placeholder="e.g. Emergency Fund" />
+        <input type="number" id="goal-target" placeholder="Target amount ($)" min="0" step="0.01" />
+        <input type="number" id="goal-saved" placeholder="Already saved ($)" min="0" step="0.01" />
+        <button id="add-goal-btn" class="btn-primary">Add Goal</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="/js/positivity.js"></script>
+  <script>
+    async function logout() {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      window.location.href = '/login';
+    }
+  </script>
+</body>
+</html>
