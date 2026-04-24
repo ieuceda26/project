@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Session setup — stored in Postgres via Neon
+// Session setup stored in neon database
 app.use(session({
 store: new pgSession({
 pool,

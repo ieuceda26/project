@@ -8,7 +8,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 
-// GET all transactions (optionally filter by week or month)
+// GET all transactions
 router.get('/', async (req, res) => {
   try {
     const { range } = req.query; // 'week' or 'month'
