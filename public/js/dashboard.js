@@ -35,7 +35,7 @@ await Promise.all([loadSummary(), loadTransactions()]);
 
 // — Pie Chart —
 async function loadSummary() {
-const res = await fetch(`/api/transactions/summary?range=${currentRange}`);
+const res = await fetch(`/api/transactions/summary?range=${currentRange}`, { credentials: 'include' });
 const data = await res.json();
 
 const noDataMsg = document.getElementById('no-data-msg');
@@ -81,7 +81,7 @@ label: ctx => ` ${ctx.label}: $${ctx.parsed.toFixed(2)}`,
 
 // — Transaction List —
 async function loadTransactions() {
-const res = await fetch(`/api/transactions?range=${currentRange}`);
+const res = await fetch(`/api/transactions?range=${currentRange}`, { credentials: 'include' });
 const data = await res.json();
 const list = document.getElementById('transaction-list');
 
@@ -170,7 +170,7 @@ loadAll();
 // — Delete Transaction —
 async function deleteTransaction(id) {
 if (!confirm('Delete this transaction?')) return;
-await fetch(`/api/transactions/${id}`, { method: 'DELETE' });
+await fetch(`/api/transactions/${id}`, { method: 'DELETE', credentials: 'include' });
 loadAll();
 }
 
