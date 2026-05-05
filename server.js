@@ -22,6 +22,8 @@ const { requireAuth, requireAuthPage } = require('./middleware/auth');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.set('trust proxy', 1); // trust first proxy for secure cookies when behind a proxy (e.g. Heroku)
+
 app.use(cors());
 app.use(express.json());
 
