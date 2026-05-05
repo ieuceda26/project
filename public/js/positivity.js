@@ -12,7 +12,7 @@ async function loadQuote() {
   authorEl.textContent = '';
 
   try {
-    const res = await fetch('/api/quotes');
+    const res = await fetch('/api/quotes', { credentials: 'include' });
     const data = await res.json();
     textEl.textContent = `"${data.text}"`;
     authorEl.textContent = `— ${data.author}`;
@@ -26,7 +26,7 @@ document.getElementById('new-quote-btn').addEventListener('click', loadQuote);
 
 // --- Goals ---
 async function loadGoals() {
-  const res = await fetch('/api/goals');
+  const res = await fetch('/api/goals', { credentials: 'include' });
   const goals = await res.json();
   const list = document.getElementById('goals-list');
 
@@ -106,7 +106,7 @@ document.getElementById('add-goal-btn').addEventListener('click', async () => {
 // --- Delete Goal ---
 async function deleteGoal(id) {
   if (!confirm('Delete this goal?')) return;
-  await fetch(`/api/goals/${id}`, { method: 'DELETE' });
+  await fetch(`/api/goals/${id}`, { method: 'DELETE', credentials: 'include' });
   await loadGoals();
 }
 
