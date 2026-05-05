@@ -30,28 +30,55 @@ async function loadGoals() {
   const goals = await res.json();
   const list = document.getElementById('goals-list');
 
+  list.replaceChildren();
+
   if (!goals.length) {
-    list.innerHTML = '<li class="empty-msg">No goals yet. Set one below!</li>';
+    const emptyMsg = document.createElement('li');
+    emptyMsg.className = 'empty-msg';
+    emptyMsg.textContent = 'No goals yet. Set one below!';
+    list.appendChild(emptyMsg);
     return;
   }
 
-  list.innerHTML = goals.map(g => {
+  goals.forEach(g => {
     const pct = Math.min(100, Math.round((g.saved_amount / g.target_amount) * 100));
-    return `
-      <li class="goal-item">
-        <div class="goal-header">
-          <span class="goal-title">${g.title}</span>
-          <button class="btn-danger" onclick="deleteGoal(${g.id})">✕</button>
-        </div>
-        <span class="goal-amounts">$${parseFloat(g.saved_amount).toFixed(2)} saved of $${parseFloat(g.target_amount).toFixed(2)} — ${pct}%</span>
-        <div class="progress-bar-bg">
-          <div class="progress-bar-fill" style="--pct:${pct}%"></div>
-        </div>
-      </li>
-    `;
-  }).join('');
-}
+    const li = document.createElement('li');
+    li.className = 'goal-item';
+    
+    const header = document.createElement('div');
+    header.className = 'goal-header';
+    
+    const titleSpan = document.createElement('span');
+    titleSpan.className = 'goal-title';
+    titleSpan.textContent = g.title;
 
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn-danger';
+    deleteBtn.textContent = '✕';
+    deleteBtn.addEventListener('click', () => deleteGoal(g.id));
+    
+    header.appendChild(titleSpan);
+    header.appendChild(deleteBtn);
+
+    //amounts
+    const amounts = document.createElement('span');
+    amounts.className = 'goal-amounts';
+    amounts.textContent = `$${parseFloat(g.saved_amount).toFixed(2)} saved of $${parseFloat(g.target_amount).toFixed(2)} - ${pct}%`;
+
+    //progress bar
+    const barBg = document.createElement('div');
+    barBg.className = 'progress-bar-bg';
+    const barFill = document.createElement('div');
+    barFill.className = 'progress-bar-fill';
+    barFill.style.setProperty('--fill', `${pct}%`);
+    barBg.appendChild(barFill);
+
+    li.appendChild(header);
+    li.appendChild(amounts);
+    li.appendChild(barBg);
+    list.appendChild(li);
+  });
+}
 // --- Add Goal ---
 document.getElementById('add-goal-btn').addEventListener('click', async () => {
   const title = document.getElementById('goal-title').value.trim();
@@ -73,14 +100,14 @@ document.getElementById('add-goal-btn').addEventListener('click', async () => {
   document.getElementById('goal-target').value = '';
   document.getElementById('goal-saved').value = '';
 
-  loadGoals();
+  await loadGoals();
 });
 
 // --- Delete Goal ---
 async function deleteGoal(id) {
   if (!confirm('Delete this goal?')) return;
   await fetch(`/api/goals/${id}`, { method: 'DELETE' });
-  loadGoals();
+  await loadGoals();
 }
 
 // Init
